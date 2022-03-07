@@ -1,28 +1,29 @@
 import SpriteKit
 import GameplayKit
 
+import UIKit
 
 
-// Collision / Contact Categories
-struct categories {
+
+// Masks
+struct categories
+{
     static let bars : UInt32 = UInt32(3)
     
     static let monkeis : UInt32 = UInt32(1)
-    static let brick   : UInt32 = UInt32(2)       // 1
-    //    static let raquete: UInt32 = UInt32(3)
+    static let brick   : UInt32 = UInt32(2)
+   
     static let death: UInt32 = UInt32(4)
     static let border: UInt32 = UInt32(5)
 }
 
 
 
-class GameScene: SKScene {
-    
+class GameScene: SKScene
+{
     var panGesture: UIPanGestureRecognizer!
     
-    
     var shootCenter: CGPoint!
-    
     
     private var pauseButton: SKSpriteNode!
     private var playButton: SKSpriteNode!
@@ -34,22 +35,42 @@ class GameScene: SKScene {
     
     private var ballsEmitter: SKEmitterNode!
     private var monkeyNode: SKSpriteNode!
+    
+    
+    
     var curTime : Int = 0;
     var gameTimer : Timer!
-    
-    
     private var timerLabel: SKLabelNode!
     private var scoreLabel: SKLabelNode!
     
     
     private var worldNode: SKNode!
     
+    
+    override func didMove(to view: SKView)
+    {
+        let myLabel : UILabel = UILabel(frame: CGRect(x: 20, y: 20, width: 200, height: 50));
+        myLabel.text = "Ding";
+        self.scene?.view?.addSubview(myLabel);
+        
+        
+        
+        
+        
+        
+        buildEmitterReleaseAndCircle()
+        buildTimer()
+        
+        pauseAndDim()
+    }
+    
+    
     func makeNewMonkey ()
     {
         if ( self.monkeyNode != nil)
         {
-            self.monkeyNode.removeFromParent()
             self.monkeyNode.physicsBody?.velocity = CGVector.zero
+            self.monkeyNode.removeFromParent()
         }
         
         
@@ -57,11 +78,10 @@ class GameScene: SKScene {
         self.monkeyNode.texture = SKTexture(imageNamed: "monkey.png")
         self.monkeyNode.size = CGSize(width: 128, height: 128)
         addChild(monkeyNode)
-        //        self.monkeyNode.isHidden = true
         
         self.monkeyNode.physicsBody = SKPhysicsBody.init(rectangleOf: self.monkeyNode.size)
         //
-        self.monkeyNode.physicsBody?.restitution = 0.1
+        self.monkeyNode.physicsBody?.restitution = 0.1 // bounciness decay
         self.monkeyNode.physicsBody?.usesPreciseCollisionDetection = true;
         self.monkeyNode.physicsBody?.affectedByGravity = false
         self.monkeyNode.physicsBody?.isDynamic = false
@@ -70,29 +90,21 @@ class GameScene: SKScene {
         self.monkeyNode.physicsBody?.friction = 0.1
         self.monkeyNode.physicsBody?.linearDamping = 0
         
-        // belong to
+        
+        // where belong to
         self.monkeyNode.physicsBody?.categoryBitMask = categories.monkeis
         
-        // interaction notification
+        // which contacts are detected
         self.monkeyNode.physicsBody?.contactTestBitMask = categories.monkeis
         
-        // which can collide with
+        // what does it collide againast
         self.monkeyNode.physicsBody?.collisionBitMask = categories.monkeis
-        
         self.monkeyNode.zPosition = 5;
     }
-    
-    
-    
-    
-    func buildTheWorld ()    {
-        self.view?.isMultipleTouchEnabled = true
-        
-        self.worldNode = self.childNode(withName: "//worldNode_id") as SKNode!
 
-    }
     
-    func buildEmitter() {
+    func buildEmitterReleaseAndCircle()
+    {
         ballsEmitter = self.childNode(withName: "//ballsEmitter_id") as! SKEmitterNode;
         shootCenter = ballsEmitter.position
         ballsEmitter.zPosition = 2
@@ -113,25 +125,19 @@ class GameScene: SKScene {
         shootCircle.zPosition = 3
     }
     
-    override func didMove(to view: SKView) {
-        
-        buildTheWorld()
-        buildEmitter()
-        pauseAndDimmer()
-        
-        buildTimer()
-    }
+
     
-    func pauseAndDimmer () {
+    func pauseAndDim ()
+    {
         self.pauseButton = self.childNode(withName: "//pauseButton_id") as! SKSpriteNode;
-        
         pauseButton.zPosition = 10
         
         self.dimmerNode = self.childNode(withName: "//dimmer_id") as! SKSpriteNode;
         self.dimmerNode.isHidden = true
     }
     
-    func buildTimer()    {
+    func buildTimer()
+    {
         self.timerLabel = self.childNode(withName: "//timerLabel_id") as! SKLabelNode;
         self.scoreLabel = self.childNode(withName: "//scoreLabel_id") as! SKLabelNode;
         
@@ -145,15 +151,18 @@ class GameScene: SKScene {
     
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if ( super.isPaused ) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        if ( super.isPaused )
+        {
             return
         }
         
         let myTouch: UITouch = touches.first!
         let loc: CGPoint = myTouch.location(in: self)
         
-        if pauseButton.contains(loc)  {
+        if pauseButton.contains(loc)
+        {
             // pause the game
             super.isPaused = true
             
@@ -164,7 +173,8 @@ class GameScene: SKScene {
             pauseButton.alpha = 0.5
             self.dimmerNode.isHidden = false
         }
-        else {
+        else
+        {
             makeNewMonkey()
             ballsEmitter.isHidden = false
         }
@@ -181,22 +191,25 @@ class GameScene: SKScene {
         
         let curL = myTouch.location(in: self)
         
-        
         let angle : CGFloat = atan2(shootCenter.y - curL.y, shootCenter.x - curL.x) - atan2(0, 1)
         let dist : CGFloat = sqrt(pow(curL.y-shootCenter.y, 2) + pow(curL.x-shootCenter.x, 2))
-        
-        //        print("dist is \(dist)")
-        
+
         var shootCircleW = dist * 2
         
-        if (shootCircleW > 300) {
+        if (shootCircleW > 300)
+        {
             shootCircleW = 300
-        } else if (shootCircleW < 50) {
+        }
+        else if (shootCircleW < 50)
+        {
             shootCircleW = 50
         }
         
         
-        let dir : CGVector = CGVector(dx: curL.x-shootCenter.x, dy: curL.y-shootCenter.y).normalized()
+        
+        
+        let dir : CGVector = CGVector(dx: curL.x-shootCenter.x,
+                                      dy: curL.y-shootCenter.y).normalized()
         let releasePointLoc: CGPoint = CGPoint(x: dir.dx * shootCircleW / 2 + shootCenter.x,
                                                y: dir.dy * shootCircleW / 2 + shootCenter.y )
         releasePoint.zRotation = angle
@@ -216,27 +229,21 @@ class GameScene: SKScene {
         ballsEmitter.particleSpeed = dist
         
         ballsEmitter.position = CGPoint(x: shootCenter.x, y: shootCenter.y)
-        
     }
     
-    
-    
-    
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        //        if touches.count != 1
-        //        {
-        //            return
-        //        }
-        
+
+   
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        run(SKAction.playSoundFileNamed("Beep1.wav", waitForCompletion: false))
+
         
         ballsEmitter.isHidden = true
         
         let myTouch: UITouch = touches.first!
-        let finalL = myTouch.location(in: self)
+        let finalTouchLoc = myTouch.location(in: self)
         
-        if playButton != nil && playButton.contains(finalL)
+        if playButton != nil && playButton.contains(finalTouchLoc)
         {
             // re - play the game
             super.isPaused = false
@@ -253,7 +260,6 @@ class GameScene: SKScene {
             return
         }
         
-        
         self.monkeyNode.physicsBody?.affectedByGravity = true
         self.monkeyNode.physicsBody?.isDynamic = true
         
@@ -261,15 +267,13 @@ class GameScene: SKScene {
         releasePoint.isHidden = true
         
         
-        
         ballsEmitter.particleBirthRate = 0
         
+ 
+        let angle : CGVector = CGVector(dx: shootCenter.x - finalTouchLoc.x,
+                                        dy: shootCenter.y - finalTouchLoc.y ).normalized()
         
-        
-        
-        let angle : CGVector = CGVector(dx: shootCenter.x - finalL.x, dy: shootCenter.y - finalL.y ).normalized()
-        
-        let forceVal : CGFloat = 200 * sqrt(pow(finalL.y-shootCenter.y, 2) + pow(finalL.x-shootCenter.x, 2))
+        let forceVal : CGFloat = 200 * sqrt(pow(finalTouchLoc.y-shootCenter.y, 2) + pow(finalTouchLoc.x-shootCenter.x, 2))
         
         let force : CGVector = CGVector (dx: angle.dx * forceVal, dy: angle.dy * forceVal)
         
@@ -277,9 +281,10 @@ class GameScene: SKScene {
     }
     
     
-    @objc func timerFunc()    {
-        
-        if ( !super.isPaused)        {
+    @objc func timerFunc()
+    {
+        if ( !super.isPaused)
+        {
             curTime += 1;
             let timeMins: Int = abs(curTime / 60);
             let timeSecs: Int = curTime % 60;
@@ -291,23 +296,21 @@ class GameScene: SKScene {
     }
     
     
-    override func update(_ currentTime: TimeInterval) {
-        
-        
+    override func update(_ currentTime: TimeInterval)
+    {
     }
 }
 
-extension Double {
-    var degreesToRadians: Double { return Double(self) * .pi / 180 }
-    var radiansToDegrees: Double { return Double(self) * 180 / .pi }
-}
 
-extension CGVector {
-    func length() -> CGFloat {
+extension CGVector
+{
+    func length() -> CGFloat
+    {
         return sqrt(dx*dx + dy*dy)
     }
     
-    func normalized() -> CGVector {
+    func normalized() -> CGVector
+    {
         return CGVector(dx: self.dx / length(), dy:self.dy / length())
     }
 }

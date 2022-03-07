@@ -9,23 +9,12 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             
-            // Load the SKScene from 'GameScene.sks'
-            
-            
-//// ANGRY MONKEY SCENE
-//            if let scene = SKScene(fileNamed: "GameScene") {
-//                scene.scaleMode = .aspectFill
-//                view.presentScene(scene)
-//            }
-            
-            
-            // THE BASIC SCENE
-            if let scene = SKScene(fileNamed: "BasicScene") {
+
+            if let scene = SKScene(fileNamed: "GameScene")
+            {
                 scene.scaleMode = .aspectFill
                 view.presentScene(scene)
             }
-            
-            
             
             view.ignoresSiblingOrder = true
             view.showsFPS = true

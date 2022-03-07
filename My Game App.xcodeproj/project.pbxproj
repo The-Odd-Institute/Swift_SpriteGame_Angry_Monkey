@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		292160972077CF8F00F24520 /* firePar.sks in Resources */ = {isa = PBXBuildFile; fileRef = 292160962077CF8F00F24520 /* firePar.sks */; };
+		292160C12077E33C00F24520 /* MyFier.sks in Resources */ = {isa = PBXBuildFile; fileRef = 292160C02077E33C00F24520 /* MyFier.sks */; };
 		2957DFF41F659502007CAE78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2957DFF31F659502007CAE78 /* AppDelegate.swift */; };
 		2957DFF61F659502007CAE78 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2957DFF51F659502007CAE78 /* GameScene.sks */; };
 		2957DFF81F659502007CAE78 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2957DFF71F659502007CAE78 /* Actions.sks */; };
@@ -26,14 +28,12 @@
 		2957E0571F6626AB007CAE78 /* metal.png in Resources */ = {isa = PBXBuildFile; fileRef = 2957E0561F6626A9007CAE78 /* metal.png */; };
 		2957E05A1F662BAD007CAE78 /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2957E0591F662938007CAE78 /* pauseButton.png */; };
 		2957E05B1F662BAD007CAE78 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2957E0581F662938007CAE78 /* playButton.png */; };
-		2983CBC51F681A6400FD387E /* BasicScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2983CBC41F681A6400FD387E /* BasicScene.sks */; };
-		2983CBC71F681ABE00FD387E /* BasicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2983CBC61F681ABE00FD387E /* BasicScene.swift */; };
 		2983CBC91F681D1800FD387E /* Beep1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2983CBC81F681D1500FD387E /* Beep1.wav */; };
-		2983CBCB1F68229300FD387E /* MyRain.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2983CBCA1F68229300FD387E /* MyRain.sks */; };
-		2983CBCD1F6853AB00FD387E /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2983CBCC1F6853AB00FD387E /* FireParticles.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		292160962077CF8F00F24520 /* firePar.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = firePar.sks; sourceTree = "<group>"; };
+		292160C02077E33C00F24520 /* MyFier.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyFier.sks; sourceTree = "<group>"; };
 		2957DFF01F659502007CAE78 /* My Game App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Game App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2957DFF31F659502007CAE78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2957DFF51F659502007CAE78 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -55,11 +55,7 @@
 		2957E0561F6626A9007CAE78 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
 		2957E0581F662938007CAE78 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
 		2957E0591F662938007CAE78 /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
-		2983CBC41F681A6400FD387E /* BasicScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BasicScene.sks; sourceTree = "<group>"; };
-		2983CBC61F681ABE00FD387E /* BasicScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicScene.swift; sourceTree = "<group>"; };
 		2983CBC81F681D1500FD387E /* Beep1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Beep1.wav; sourceTree = "<group>"; };
-		2983CBCA1F68229300FD387E /* MyRain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyRain.sks; sourceTree = "<group>"; };
-		2983CBCC1F6853AB00FD387E /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticles.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,17 +88,15 @@
 		2957DFF21F659502007CAE78 /* My Game App */ = {
 			isa = PBXGroup;
 			children = (
-				2957E04A1F65CC23007CAE78 /* images */,
+				2957E04A1F65CC23007CAE78 /* media */,
 				2957DFF31F659502007CAE78 /* AppDelegate.swift */,
+				2957DFFB1F659502007CAE78 /* GameViewController.swift */,
 				2957DFF51F659502007CAE78 /* GameScene.sks */,
-				2983CBC41F681A6400FD387E /* BasicScene.sks */,
 				2957E0381F65A5B4007CAE78 /* BallsPar.sks */,
-				2983CBCC1F6853AB00FD387E /* FireParticles.sks */,
-				2983CBCA1F68229300FD387E /* MyRain.sks */,
+				292160C02077E33C00F24520 /* MyFier.sks */,
+				292160962077CF8F00F24520 /* firePar.sks */,
 				2957DFF71F659502007CAE78 /* Actions.sks */,
 				2957DFF91F659502007CAE78 /* GameScene.swift */,
-				2983CBC61F681ABE00FD387E /* BasicScene.swift */,
-				2957DFFB1F659502007CAE78 /* GameViewController.swift */,
 				2957DFFD1F659502007CAE78 /* Main.storyboard */,
 				2957E0001F659502007CAE78 /* Assets.xcassets */,
 				2957E0021F659502007CAE78 /* LaunchScreen.storyboard */,
@@ -111,7 +105,7 @@
 			path = "My Game App";
 			sourceTree = "<group>";
 		};
-		2957E04A1F65CC23007CAE78 /* images */ = {
+		2957E04A1F65CC23007CAE78 /* media */ = {
 			isa = PBXGroup;
 			children = (
 				2983CBC81F681D1500FD387E /* Beep1.wav */,
@@ -126,7 +120,7 @@
 				2957E0461F65C5CF007CAE78 /* releasePoint.png */,
 				2957E0411F65BF1F007CAE78 /* shootCircle.png */,
 			);
-			path = images;
+			path = media;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,25 +183,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				2957E04D1F65CC65007CAE78 /* monkey.png in Resources */,
-				2983CBCB1F68229300FD387E /* MyRain.sks in Resources */,
 				2957E0391F65A5B4007CAE78 /* BallsPar.sks in Resources */,
 				2957E04E1F65CC65007CAE78 /* bg.png in Resources */,
 				2957E05B1F662BAD007CAE78 /* playButton.png in Resources */,
 				2957DFFF1F659502007CAE78 /* Main.storyboard in Resources */,
 				2957E0531F65CD75007CAE78 /* slingerShot.png in Resources */,
+				292160C12077E33C00F24520 /* MyFier.sks in Resources */,
 				2957E04C1F65CC65007CAE78 /* routBalls.png in Resources */,
 				2957E0501F65CC65007CAE78 /* releasePoint.png in Resources */,
 				2957E0571F6626AB007CAE78 /* metal.png in Resources */,
-				2983CBC51F681A6400FD387E /* BasicScene.sks in Resources */,
 				2957DFF61F659502007CAE78 /* GameScene.sks in Resources */,
 				2957E0011F659502007CAE78 /* Assets.xcassets in Resources */,
 				2957E0041F659502007CAE78 /* LaunchScreen.storyboard in Resources */,
 				2957E05A1F662BAD007CAE78 /* pauseButton.png in Resources */,
 				2957E0511F65CC65007CAE78 /* shootCircle.png in Resources */,
 				2957E0551F65CF60007CAE78 /* woodPiece.png in Resources */,
-				2983CBCD1F6853AB00FD387E /* FireParticles.sks in Resources */,
 				2983CBC91F681D1800FD387E /* Beep1.wav in Resources */,
 				2957DFF81F659502007CAE78 /* Actions.sks in Resources */,
+				292160972077CF8F00F24520 /* firePar.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +214,6 @@
 				2957DFFA1F659502007CAE78 /* GameScene.swift in Sources */,
 				2957DFFC1F659502007CAE78 /* GameViewController.swift in Sources */,
 				2957DFF41F659502007CAE78 /* AppDelegate.swift in Sources */,
-				2983CBC71F681ABE00FD387E /* BasicScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
